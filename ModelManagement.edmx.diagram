@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f9c3330971c548b4bf0d5f5dd56fdb36" Name="Diagram1">
+        <EntityTypeShape EntityType="StudentManagementModel.Dersler" Width="1.5" PointX="1.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentManagementModel.OgrenciDersleri" Width="1.5" PointX="6" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentManagementModel.Ogrenciler" Width="1.5" PointX="1.125" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentManagementModel.Ogretmen" Width="1.5" PointX="6.125" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="StudentManagementModel.FK_OgrenciDersleri_Dersler" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentManagementModel.FK_OgrenciDersleri_Ogrenciler" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.625" PointY="2.75" />
+          <ConnectorPoint PointX="3" PointY="2.3642544499412175" />
+          <ConnectorPoint PointX="5.0958330417051911" PointY="2.3642544499412175" />
+          <ConnectorPoint PointX="5.0958330417051911" PointY="3.0475878906249996" />
+          <ConnectorPoint PointX="5.625" PointY="3.0475878906249996" />
+          <ConnectorPoint PointX="6" PointY="2.672587890625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="StudentManagementModel.Chat" Width="1.5" PointX="3.75" PointY="5.375" />
+        <AssociationConnector Association="StudentManagementModel.FK_Chat_Ogrenciler" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

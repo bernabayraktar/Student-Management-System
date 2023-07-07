@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StudentManagementModelStoreContainer" CdmEntityContainer="StudentManagementEntities">
+    <EntitySetMapping Name="Dersler">
+      <EntityTypeMapping TypeName="StudentManagementModel.Dersler">
+        <MappingFragment StoreEntitySet="Dersler">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DersAdi" ColumnName="DersAdi" />
+          <ScalarProperty Name="DersKodu" ColumnName="DersKodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OgrenciDersleri">
+      <EntityTypeMapping TypeName="StudentManagementModel.OgrenciDersleri">
+        <MappingFragment StoreEntitySet="OgrenciDersleri">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OgrenciId" ColumnName="OgrenciId" />
+          <ScalarProperty Name="DersId" ColumnName="DersId" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ogrenciler">
+      <EntityTypeMapping TypeName="StudentManagementModel.Ogrenciler">
+        <MappingFragment StoreEntitySet="Ogrenciler">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OgrenciNo" ColumnName="OgrenciNo" />
+          <ScalarProperty Name="OgrenciAdi" ColumnName="OgrenciAdi" />
+          <ScalarProperty Name="OgrenciSoyadi" ColumnName="OgrenciSoyadi" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="EPosta" ColumnName="EPosta" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ogretmen">
+      <EntityTypeMapping TypeName="StudentManagementModel.Ogretmen">
+        <MappingFragment StoreEntitySet="Ogretmen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OgretmenAdi" ColumnName="OgretmenAdi" />
+          <ScalarProperty Name="OgretmenSoyadi" ColumnName="OgretmenSoyadi" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chat">
+      <EntityTypeMapping TypeName="StudentManagementModel.Chat">
+        <MappingFragment StoreEntitySet="Chat">
+          <ScalarProperty Name="Gonderen" ColumnName="Gonderen" />
+          <ScalarProperty Name="OgrenciId" ColumnName="OgrenciId" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

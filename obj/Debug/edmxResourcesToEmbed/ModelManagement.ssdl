@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OgrenciId" Type="int" Nullable="false" />
+    <Property Name="Gonderen" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dersler">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DersAdi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DersKodu" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OgrenciDersleri">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OgrenciId" Type="int" Nullable="false" />
+    <Property Name="DersId" Type="int" Nullable="false" />
+    <Property Name="Durum" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ogrenciler">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OgrenciNo" Type="int" Nullable="false" />
+    <Property Name="OgrenciAdi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OgrenciSoyadi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sifre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EPosta" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tel" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ogretmen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OgretmenAdi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OgretmenSoyadi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Chat_Ogrenciler">
+    <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="1" />
+    <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenciler">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="OgrenciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OgrenciDersleri_Dersler">
+    <End Role="Dersler" Type="Self.Dersler" Multiplicity="1" />
+    <End Role="OgrenciDersleri" Type="Self.OgrenciDersleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dersler">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OgrenciDersleri">
+        <PropertyRef Name="DersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OgrenciDersleri_Ogrenciler">
+    <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="1" />
+    <End Role="OgrenciDersleri" Type="Self.OgrenciDersleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenciler">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OgrenciDersleri">
+        <PropertyRef Name="OgrenciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentManagementModelStoreContainer">
+    <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dersler" EntityType="Self.Dersler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OgrenciDersleri" EntityType="Self.OgrenciDersleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ogrenciler" EntityType="Self.Ogrenciler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ogretmen" EntityType="Self.Ogretmen" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Chat_Ogrenciler" Association="Self.FK_Chat_Ogrenciler">
+      <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+      <End Role="Chat" EntitySet="Chat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OgrenciDersleri_Dersler" Association="Self.FK_OgrenciDersleri_Dersler">
+      <End Role="Dersler" EntitySet="Dersler" />
+      <End Role="OgrenciDersleri" EntitySet="OgrenciDersleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OgrenciDersleri_Ogrenciler" Association="Self.FK_OgrenciDersleri_Ogrenciler">
+      <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+      <End Role="OgrenciDersleri" EntitySet="OgrenciDersleri" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

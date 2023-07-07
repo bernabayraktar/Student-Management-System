@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Dersler">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DersAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DersKodu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="OgrenciDersleri" Relationship="Self.FK_OgrenciDersleri_Dersler" FromRole="Dersler" ToRole="OgrenciDersleri" />
+  </EntityType>
+  <EntityType Name="OgrenciDersleri">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OgrenciId" Type="Int32" Nullable="false" />
+    <Property Name="DersId" Type="Int32" Nullable="false" />
+    <Property Name="Durum" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Dersler" Relationship="Self.FK_OgrenciDersleri_Dersler" FromRole="OgrenciDersleri" ToRole="Dersler" />
+    <NavigationProperty Name="Ogrenciler" Relationship="Self.FK_OgrenciDersleri_Ogrenciler" FromRole="OgrenciDersleri" ToRole="Ogrenciler" />
+  </EntityType>
+  <EntityType Name="Ogrenciler">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OgrenciNo" Type="Int32" Nullable="false" />
+    <Property Name="OgrenciAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OgrenciSoyadi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EPosta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="OgrenciDersleri" Relationship="Self.FK_OgrenciDersleri_Ogrenciler" FromRole="Ogrenciler" ToRole="OgrenciDersleri" />
+    <NavigationProperty Name="Chat" Relationship="StudentManagementModel.FK_Chat_Ogrenciler" FromRole="Ogrenciler" ToRole="Chat" />
+  </EntityType>
+  <EntityType Name="Ogretmen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OgretmenAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OgretmenSoyadi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_OgrenciDersleri_Dersler">
+    <End Role="Dersler" Type="Self.Dersler" Multiplicity="1" />
+    <End Role="OgrenciDersleri" Type="Self.OgrenciDersleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dersler">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OgrenciDersleri">
+        <PropertyRef Name="DersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OgrenciDersleri_Ogrenciler">
+    <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="1" />
+    <End Role="OgrenciDersleri" Type="Self.OgrenciDersleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenciler">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OgrenciDersleri">
+        <PropertyRef Name="OgrenciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Dersler" EntityType="Self.Dersler" />
+    <EntitySet Name="OgrenciDersleri" EntityType="Self.OgrenciDersleri" />
+    <EntitySet Name="Ogrenciler" EntityType="Self.Ogrenciler" />
+    <EntitySet Name="Ogretmen" EntityType="Self.Ogretmen" />
+    <AssociationSet Name="FK_OgrenciDersleri_Dersler" Association="Self.FK_OgrenciDersleri_Dersler">
+      <End Role="Dersler" EntitySet="Dersler" />
+      <End Role="OgrenciDersleri" EntitySet="OgrenciDersleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OgrenciDersleri_Ogrenciler" Association="Self.FK_OgrenciDersleri_Ogrenciler">
+      <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+      <End Role="OgrenciDersleri" EntitySet="OgrenciDersleri" />
+    </AssociationSet>
+    <EntitySet Name="Chat" EntityType="StudentManagementModel.Chat" />
+    <AssociationSet Name="FK_Chat_Ogrenciler" Association="StudentManagementModel.FK_Chat_Ogrenciler">
+      <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+      <End Role="Chat" EntitySet="Chat" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OgrenciId" Type="Int32" Nullable="false" />
+    <Property Name="Gonderen" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Ogrenciler" Relationship="StudentManagementModel.FK_Chat_Ogrenciler" FromRole="Chat" ToRole="Ogrenciler" />
+  </EntityType>
+  <Association Name="FK_Chat_Ogrenciler">
+    <End Type="StudentManagementModel.Ogrenciler" Role="Ogrenciler" Multiplicity="1" />
+    <End Type="StudentManagementModel.Chat" Role="Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenciler">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="OgrenciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
